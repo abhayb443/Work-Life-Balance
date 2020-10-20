@@ -1,0 +1,93 @@
+{% block head %}
+<title>Work Life Balance</title>
+<style>
+.button {
+  display: inline-block;
+  padding: 2% 8%;
+  font-size: 50%;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #487F9C;
+  border: none;
+  border-radius: 10%;
+  box-shadow: 0 5% #999;
+}
+
+.button:hover {background-color: #134261}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5% #666;
+  transform: translateY(2%);
+
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+<link rel="shortcut icon" href="{{ url_for('static', filename='Programming with Rookie.png') }}" type="image/x-icon">
+{% endblock %}
+
+{% block page_content %}
+<audio id="over_music">
+    <source src="{{ url_for('static', filename='beepbeep.mp3') }}">
+</audio>
+
+<div>
+    {#% if True %}yay{% endif %#}
+</div>
+
+<div class="timer">
+    <p id="time"></p>
+</div>
+
+<div style="width:40%; margin:0 auto;">
+    <form method="POST" action="{{ url_for('custom') }}" style="display:inline">
+        <input name="time" type="text" placeholder=" Enter time in seconds.." />
+        <input type="submit" class="button" value="START"/>
+    </form>
+    &nbsp;&nbsp;
+    <a class="button" href="{{ url_for('minutes', num=90) }}" >90 Minutes</a>
+    &nbsp;&nbsp;
+    <a class="button" href="{{ url_for('minutes', num=20) }}" >20 Minutes</a>
+
+    {% for message in get_flashed_messages() %}
+    <div class="alert-info">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <div class="usage" id="help-info">
+    </div>
+</div>
+
+<center>
+<p>Follow me here<br><br>
+    <a href="https://abhaypanhere.wixsite.com/programming-wrookies" target="_blank">programming-with-rookies || </a>
+    <a href="https://programmingwithrookies.wordpress.com/" target="_blank">programming-with-rookies || </a>
+    <a href="https://www.youtube.com/channel/UCcZf3TCM5o_HSr2s_Dku5GA/" target="_blank">programming-with-rookies</a></p>
+</center>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+<script>
+  var Seconds = {{ num }};
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-180908059-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+{% endblock %}
+
